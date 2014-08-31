@@ -1,0 +1,18 @@
+web1:
+  name: roma
+  shared_writable_dirs: 
+    - application/cache
+    - application/logs
+  php_extensions:
+    - apc
+    - mbstring
+    - mcrypt
+    - mysql
+    - mysqli
+    - pdo_mysql
+  after_build:
+    # Move pagoda config file to app/config
+    - "mv pagoda/database.php application/config/database.php"
+db1:
+  name: bari
+

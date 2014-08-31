@@ -1,0 +1,27 @@
+DirectoryIndex index.php
+Options -Indexes
+Options +FollowSymLinks
+ErrorDocument 404 /var/www/media/getfrom404
+RewriteEngine on
+
+ReWriteCond %{HTTP_HOST} ^www.youtubemp3donusturucu.com$ [NC]
+ReWriteRule ^(.*)$ http://youtubemp3donusturucu.com/$1 [R=301,L]
+
+ReWriteCond %{HTTP_HOST} ^(www.)?youtubemp3donusturucu.net$ [NC]
+ReWriteRule ^(.*)$ http://youtubemp3donusturucu.net/$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond $1 !^(index\.php|cdn|assets|img|images|css|js|robots\.txt|favicon\.ico|all_min\.js)
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+#Removes access to the system folder by users.
+#Additionally this will allow you to create a System.php controller,
+#previously this would not have been possible.
+#'system' can be replaced if you have renamed your system folder.
+RewriteCond %{REQUEST_URI} ^system.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+#RewriteCond %{REQUEST_URI} !^/mobile/.*$
+#RewriteCond %{HTTP_USER_AGENT} "android|blackberry|ipad|iphone|ipod|iemobile|opera mobile|palmos|webos|googlebot-mobile" [NC]
+#RewriteRule ^(.*)$ /mobile/ [L,R=302]
